@@ -101,7 +101,9 @@
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
-            <scope>test</scope>
+            <!-- Revert "Sentinel Dashboard 'Rule Push 模式' Nacos持久化改造 - fengt delete start -->
+            <!--<scope>test</scope>-->
+            <!-- Revert "Sentinel Dashboard 'Rule Push 模式' Nacos持久化改造 - fengt delete   end -->
         </dependency>
         <!-- for Apollo rule publisher sample -->
         <dependency>
