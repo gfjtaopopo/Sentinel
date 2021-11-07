@@ -17,15 +17,18 @@ package com.alibaba.csp.sentinel.dashboard.rule.nacos.gateway.gatewayFlow;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.gateway.GatewayFlowRuleEntity;
 import com.alibaba.csp.sentinel.dashboard.rule.DynamicRuleProvider;
+import com.alibaba.csp.sentinel.dashboard.rule.config.ConfigServiceFT;
 import com.alibaba.csp.sentinel.dashboard.rule.nacos.NacosConfigUtil;
+import com.alibaba.csp.sentinel.dashboard.rule.properties.AppNacosRegisterProperties;
+import com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration;
 import com.alibaba.csp.sentinel.datasource.Converter;
 import com.alibaba.csp.sentinel.util.StringUtil;
-import com.alibaba.nacos.api.config.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Eric Zhao
@@ -35,14 +38,21 @@ import java.util.List;
 public class GatewayFlowRuleNacosProvider implements DynamicRuleProvider<List<GatewayFlowRuleEntity>> {
 
     @Autowired
-    private ConfigService configService;
+    private ConfigServiceFT configServiceFT;
     @Autowired
     private Converter<String, List<GatewayFlowRuleEntity>> converter;
+    @Autowired
+    private NacosPropertiesConfiguration nacosProperties;
 
     @Override
     public List<GatewayFlowRuleEntity> getRules(String appName) throws Exception {
-        String rules = configService.getConfig(appName + NacosConfigUtil.GATEWAY_FLOW_DATA_ID_POSTFIX,
-            NacosConfigUtil.GROUP_ID, 3000);
+
+        Map<String, AppNacosRegisterProperties> apps = nacosProperties.getLocation();
+
+        String rules = configServiceFT.getConfig(apps.containsKey(appName) ? apps.get(appName).getNamespace() : nacosProperties.getNamespace(),
+                appName + NacosConfigUtil.GATEWAY_FLOW_DATA_ID_POSTFIX,
+                apps.containsKey(appName) ? apps.get(appName).getGroupId() : nacosProperties.getGroupId(), 3000);
+
         if (StringUtil.isEmpty(rules)) {
             return new ArrayList<>();
         }

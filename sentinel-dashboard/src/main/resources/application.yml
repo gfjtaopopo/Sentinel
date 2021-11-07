@@ -1,0 +1,20 @@
+# Sentinel Dashboard 'Rule Push 模式' Nacos持久化改造 - fengt add start
+# server.port=8899
+# nacos setting group default SENTINEL_GROUP
+sentinel:
+  datasource:
+    nacos:
+      server-addr: localhost:8848
+      namespace: sentinel_namespace_id
+      groupId: SENTINEL_GROUP
+## Sentinel Dashboard 'Rule Push 模式' Nacos持久化改造 - fengt add   end
+## 动态配置从配置 App 的 name
+#      location:
+#        ruoyi-gateway:                      # App 注册名
+##          name: ruoyi-gateway
+#          namespace: new_sentinel_namespace_id  # Namespace ID
+#          groupId: app1
+#        ruoyi-system:
+##          name: ruyi-system
+#          namespace: new_sentinel_namespace_id
+#          groupId: app2

@@ -21,8 +21,10 @@ package com.alibaba.csp.sentinel.dashboard.rule.nacos;
  */
 public final class NacosConfigUtil {
 
+    public static final String PROPERTY_PREFIX = "sentinel.datasource.nacos";
+    public static final String SERVER_ADDR = "localhost:8848";
     public static final String GROUP_ID = "SENTINEL_GROUP";
-    
+
     public static final String FLOW_DATA_ID_POSTFIX = "-flow-rules";
     public static final String DEGRADE_DATA_ID_POSTFIX = "-degrade-rules";
     public static final String PARAM_FLOW_DATA_ID_POSTFIX = "-param-flow-rules";

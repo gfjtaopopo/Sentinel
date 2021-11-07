@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "sentinel.datasource.nacos",
+      "type": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration",
+      "sourceType": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "sentinel.datasource.nacos.server-addr",
+      "type": "java.lang.String",
+      "description": "",
+      "sourceType": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration",
+      "defaultValue": "localhost:8848"
+    },
+    {
+      "name": "sentinel.datasource.nacos.namespace",
+      "type": "java.lang.String",
+      "description": "",
+      "sourceType": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration",
+      "defaultValue": "sentinel_namespace_id"
+    },
+    {
+      "name": "sentinel.datasource.nacos.groupId",
+      "type": "java.lang.String",
+      "description": "",
+      "sourceType": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration",
+      "defaultValue": "SENTINEL_GROUP"
+    },
+    {
+      "name": "sentinel.datasource.nacos.location",
+      "type": "java.util.Map<java.lang.String,com.alibaba.csp.sentinel.dashboard.rule.properties.AppNacosRegisterProperties>",
+      "description": "",
+      "sourceType": "com.alibaba.csp.sentinel.dashboard.rule.properties.NacosPropertiesConfiguration"
+    }
+  ],
+  "hints": []
+}
