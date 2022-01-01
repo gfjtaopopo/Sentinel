@@ -11,5 +11,5 @@ public interface ConfigServiceFT extends ConfigService
 {
     String getConfig(String var1, String var2, String var3, long var4) throws NacosException;
 
-    boolean publishConfig(String var1, String var2, String var3, String var4) throws NacosException;
+    boolean publishConfig(String var1, String var2, String var3, String var4, String var5, String var6) throws NacosException;
 }

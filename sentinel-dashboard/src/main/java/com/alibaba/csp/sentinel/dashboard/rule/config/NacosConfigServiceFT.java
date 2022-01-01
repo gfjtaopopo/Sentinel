@@ -174,7 +174,10 @@ public class NacosConfigServiceFT implements ConfigServiceFT
         }
     }
 
-    private boolean publishConfigInner(String tenant, String dataId, String group, String tag, String appName, String betaIps, String content) throws NacosException {
+    /**
+     * 修改方法, 新增配置文件类型参数 type
+     */
+    private boolean publishConfigInner(String tenant, String dataId, String group, String tag, String appName, String betaIps, String content, String type) throws NacosException {
         group = this.null2defaultGroup(group);
         ParamUtils.checkParam(dataId, group, content);
         ConfigRequest cr = new ConfigRequest();
@@ -207,6 +210,11 @@ public class NacosConfigServiceFT implements ConfigServiceFT
             params.add(tag);
         }
 
+        if (StringUtils.isNotEmpty(type)) {
+            params.add("type");
+            params.add(type);
+        }
+
         List<String> headers = new ArrayList();
         if (StringUtils.isNotEmpty(betaIps)) {
             headers.add("betaIps");
@@ -234,6 +242,14 @@ public class NacosConfigServiceFT implements ConfigServiceFT
         }
     }
 
+    /**
+     * 新增方法
+     */
+    private boolean publishConfigInner(String tenant, String dataId, String group, String tag, String appName, String betaIps, String content) throws NacosException
+    {
+        return publishConfigInner(tenant, dataId, group, tag, appName, betaIps, content, null);
+    }
+
     public String getServerStatus() {
         return this.worker.isHealthServer() ? "UP" : "DOWN";
     }
@@ -250,8 +266,8 @@ public class NacosConfigServiceFT implements ConfigServiceFT
     /**
      * 新增方法
      */
-    public boolean publishConfig(String namespace, String dataId, String group, String content) throws NacosException
+    public boolean publishConfig(String namespace, String dataId, String group, String content, String appName, String type) throws NacosException
     {
-        return this.publishConfigInner(namespace == null ? this.namespace : namespace.trim(), dataId, group, (String) null, (String) null, (String) null, content);
+        return this.publishConfigInner(namespace == null ? this.namespace : namespace.trim(), dataId, group, (String) null, appName, (String) null, content, type);
     }
 }
